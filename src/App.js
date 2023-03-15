@@ -39,7 +39,7 @@ function App() {
   const [vfsIndex, setVfsIndex] = useState(0)
   const [clfIndex, setClfIndex] = useState(0)
 
-  const fileName = `/results/bib-${bibList[bibIndex]}+brh-${brhList[brhIndex]}+vfs-${vfsList[vfsIndex]}+clf-2.0.jpg`
+  const fileName = `/results/bib-${bibList[bibIndex]}+brh-${brhList[brhIndex]}+vfs-${vfsList[vfsIndex]}+clf-${clfList[clfIndex]}.jpg`
   return (
     <div className="App">
       <div className='container'>
