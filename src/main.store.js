@@ -16,10 +16,11 @@ class MainStore {
   }
 
   getCachedFiles = async () => {
-    const {data: allFiles} = await axios.get('https://api.github.com/repos/Risk-DAO/badger-simulation-results/git/trees/main?recursive=1');
+    const {data: allFiles} = await axios.get('https://api.github.com/repos/Risk-DAO/raw-results/git/trees/main?recursive=1');
     const results = allFiles.tree
-      .filter(x=> x.path.indexOf('public/results') > - 1 && x.path.indexOf('.jpg') > -1)
-      .map(({path})=> path.replace('public/results/', ''))
+      .filter(x=> x.path.indexOf('') > - 1 && x.path.indexOf('.jpg') > -1)
+      .map(({path})=> path)
+      debugger
     runInAction(()=> this.imageList = results)
   }
 
