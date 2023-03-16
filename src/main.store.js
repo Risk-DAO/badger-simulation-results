@@ -8,6 +8,7 @@ class MainStore {
   loading = true
   imageList = []
   repo = queryDict.api
+  dir = queryDict.dir || ""
   constructor () {
     makeAutoObservable(this)
     this.fetchData()
@@ -22,12 +23,11 @@ class MainStore {
   getCachedFiles = async () => {
     const {data: allFiles} = await axios.get(`https://api.github.com/repos/Risk-DAO/${this.repo}/git/trees/main?recursive=1`);
     const results = allFiles.tree
-      .filter(x=> x.path.indexOf('') > - 1 && x.path.indexOf('.jpg') > -1)
-      .map(({path})=> path)
+      .filter(x=> x.path.indexOf(this.dir) > - 1 && x.path.indexOf('.jpg') > -1)
+      .map(({path})=> path.replace(this.dir, ''))
       debugger
     runInAction(()=> this.imageList = results)
   }
-
 
   getListByParamPosition = (location) => {
     if (!this.imageList.length){
