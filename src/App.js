@@ -9,8 +9,8 @@ const ListMover = props => {
   const next = ()=> setIndex(index +1)
   const val = list[index]
   return (
-    <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
-      <div>{name}:</div>
+    <div className='list-mover' >
+      <div style={{width: 'calc(50% - 150px)', textAlign: 'right'}}>{name}:</div>
       <a onClick={prev} href="#" role="button" disabled={index == 0}>prev</a>
       <div>{val}</div>
       <a onClick={next} href="#" role="button" disabled={index == list.length-1}>next</a>
