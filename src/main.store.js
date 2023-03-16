@@ -1,9 +1,13 @@
 import { makeAutoObservable, runInAction } from "mobx"
 import axios from "axios"
 
+const queryDict = {}
+window.location.search.substr(1).split("&").forEach(function(item) {queryDict[item.split("=")[0]] = item.split("=")[1]})
+
 class MainStore {
   loading = true
   imageList = []
+  repo = queryDict.api
   constructor () {
     makeAutoObservable(this)
     this.fetchData()
@@ -16,7 +20,7 @@ class MainStore {
   }
 
   getCachedFiles = async () => {
-    const {data: allFiles} = await axios.get('https://api.github.com/repos/Risk-DAO/raw-results/git/trees/main?recursive=1');
+    const {data: allFiles} = await axios.get(`https://api.github.com/repos/Risk-DAO/${this.repo}/git/trees/main?recursive=1`);
     const results = allFiles.tree
       .filter(x=> x.path.indexOf('') > - 1 && x.path.indexOf('.jpg') > -1)
       .map(({path})=> path)
