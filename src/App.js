@@ -29,8 +29,9 @@ function App() {
   const vfsList = mainStore.getListByParamPosition(2)
   const clfList = mainStore.getListByParamPosition(3)
   
-
-  const fileName = `https://raw.githubusercontent.com/Risk-DAO/${mainStore.repo}/main/${mainStore.dir.length ? '' : mainStore.dir + '/'}bib-${bibList[bibIndex]}+brh-${brhList[brhIndex]}+vfs-${vfsList[vfsIndex]}+clf-${clfList[clfIndex]}.jpg`
+  const dir = !mainStore.dir.length ? '' : (mainStore.dir + '/')
+  debugger
+  const fileName = `https://raw.githubusercontent.com/Risk-DAO/${mainStore.repo}/main/${dir}bib-${bibList[bibIndex]}+brh-${brhList[brhIndex]}+vfs-${vfsList[vfsIndex]}+clf-${clfList[clfIndex]}.jpg`
   console.log({fileName})
   return (
     <div className="App">
