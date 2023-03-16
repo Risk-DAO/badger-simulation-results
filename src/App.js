@@ -1,23 +1,8 @@
 import React, { useState } from 'react';
 import './App.css';
-import imageList from './imageList'
+import {observer} from "mobx-react"
+import mainStore from './main.store';
 
-const getList = (location) => {
-  return [...new Set(imageList
-    .map(imgName => {
-      const name = imgName.replace(".jpg", "")
-      const param = name.split("+")[location]
-      const [,val] = param.split("-")
-      return val
-    }))]
-    .sort()
-}
-
-const bibList = getList(0)
-const brhList = getList(1)
-const vfsList = getList(2)
-const clfList = getList(3)
-debugger
 const ListMover = props => {  
   const { name, index, setIndex, list} = props
   const prev = ()=> setIndex(index -1)
@@ -39,11 +24,17 @@ function App() {
   const [vfsIndex, setVfsIndex] = useState(0)
   const [clfIndex, setClfIndex] = useState(0)
 
+  const bibList = mainStore.getListByParamPosition(0)
+  const brhList = mainStore.getListByParamPosition(1)
+  const vfsList = mainStore.getListByParamPosition(2)
+  const clfList = mainStore.getListByParamPosition(3)
+
   const fileName = `/results/bib-${bibList[bibIndex]}+brh-${brhList[brhIndex]}+vfs-${vfsList[vfsIndex]}+clf-${clfList[clfIndex]}.jpg`
   return (
     <div className="App">
       <div className='container'>
-        <article style={{display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center'}}>
+        {mainStore.loading && <article aria-busy="true"></article>}
+        {!mainStore.loading && <article style={{display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center'}}>
           <div> 
             <img style={{ height: '100%', maxHeight: '60vh'}} src={fileName}/>
           </div>
@@ -51,10 +42,10 @@ function App() {
           <ListMover name="brh" list={brhList} index={brhIndex} setIndex={setBrhIndex}/>
           <ListMover name="vfs" list={vfsList} index={vfsIndex} setIndex={setVfsIndex}/>
           <ListMover name="clf" list={clfList} index={clfIndex} setIndex={setClfIndex}/>
-        </article>
+        </article>}
       </div>
     </div>
   );
 }
 
-export default App;
+export default observer(App);
