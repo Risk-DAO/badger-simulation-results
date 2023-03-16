@@ -30,6 +30,7 @@ function App() {
   const clfList = mainStore.getListByParamPosition(3)
 
   const fileName = `/results/bib-${bibList[bibIndex]}+brh-${brhList[brhIndex]}+vfs-${vfsList[vfsIndex]}+clf-${clfList[clfIndex]}.jpg`
+  console.log({fileName})
   return (
     <div className="App">
       <div className='container'>
@@ -38,10 +39,10 @@ function App() {
           <div> 
             <img style={{ height: '100%', maxHeight: '60vh'}} src={fileName}/>
           </div>
-          <ListMover name="bib" list={bibList} index={bibIndex} setIndex={setBibIndex}/>
-          <ListMover name="brh" list={brhList} index={brhIndex} setIndex={setBrhIndex}/>
-          <ListMover name="vfs" list={vfsList} index={vfsIndex} setIndex={setVfsIndex}/>
-          <ListMover name="clf" list={clfList} index={clfIndex} setIndex={setClfIndex}/>
+          <ListMover name="curve initial balance" list={bibList} index={bibIndex} setIndex={setBibIndex}/>
+          <ListMover name="curve recovery half life" list={brhList} index={brhIndex} setIndex={setBrhIndex}/>
+          <ListMover name="eth/wbtc slippage" list={vfsList} index={vfsIndex} setIndex={setVfsIndex}/>
+          <ListMover name="stress factor" list={clfList} index={clfIndex} setIndex={setClfIndex}/>
         </article>}
       </div>
     </div>

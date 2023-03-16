@@ -35,7 +35,9 @@ class MainStore {
         const [,val] = param.split("-")
         return val
       }))]
-      .sort()
+      .sort((a, b)=> {
+        return parseFloat(a) - parseFloat(b);
+      })
   }
 }
 
