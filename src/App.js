@@ -29,7 +29,7 @@ function App() {
   const vfsList = mainStore.getListByParamPosition(2)
   const clfList = mainStore.getListByParamPosition(3)
 
-  const fileName = `/results/bib-${bibList[bibIndex]}+brh-${brhList[brhIndex]}+vfs-${vfsList[vfsIndex]}+clf-${clfList[clfIndex]}.jpg`
+  const fileName = `https://raw.githubusercontent.com/Risk-DAO/badger-simulation-results/main/public/results/bib-${bibList[bibIndex]}+brh-${brhList[brhIndex]}+vfs-${vfsList[vfsIndex]}+clf-${clfList[clfIndex]}.jpg`
   console.log({fileName})
   return (
     <div className="App">
