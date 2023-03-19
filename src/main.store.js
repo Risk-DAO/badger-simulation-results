@@ -7,7 +7,8 @@ window.location.search.substr(1).split("&").forEach(function(item) {queryDict[it
 class MainStore {
   loading = true
   imageList = []
-  repo = queryDict.api
+  entity =  queryDict.entity 
+  repo = queryDict.repo
   dir = queryDict.dir || ""
   constructor () {
     makeAutoObservable(this)
@@ -21,11 +22,19 @@ class MainStore {
   }
 
   getCachedFiles = async () => {
-    const {data: allFiles} = await axios.get(`https://api.github.com/repos/Risk-DAO/${this.repo}/git/trees/main?recursive=1`);
+    const {data: allFiles} = await axios.get(`https://api.github.com/repos/${this.entity}/${this.repo}/git/trees/main?recursive=1`);
     const results = allFiles.tree
       .filter(x=> x.path.indexOf(this.dir) > - 1 && x.path.indexOf('.jpg') > -1)
+      .filter(x=> {
+
+        if(this.dir.length == 0){
+          return x.path.indexOf('/') == -1
+        }
+        return true
+      })
       .map(({path})=> path.replace(this.dir, ''))
       debugger
+      console.log({results})
     runInAction(()=> this.imageList = results)
   }
 
